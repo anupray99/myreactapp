@@ -8,7 +8,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.json())
 
-const arr = [
+let arr = [
     {
         name: "Ram",
         roll: 100
@@ -20,14 +20,32 @@ const arr = [
 ]
 
 app.get('/', (req, res) => {
+    console.log('GET api called');
+    return res.json(arr)
+})
+
+app.delete('/:index', (req, res) => {
+    console.log('DELETE api called');
+    const index = req.params.index;
+    arr = arr.filter((obj, ind) => (ind != index))
     return res.json(arr)
 })
 
 app.post('/', (req, res) => {
+    console.log('POST api called');
     const body = req.body;
     console.log(body)
     arr.push(body)
     return res.json(arr)
+})
+
+app.put('/:index', (req, res) => {
+    console.log('UPDATE api called');
+    const index = req.params.index;
+    const body = req.body;
+    arr[index] = body;
+    return res.json(arr)
+
 })
 const PORT = process.env.PORT || 3001;
 
