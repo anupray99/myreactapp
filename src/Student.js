@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import MyContext from "./Context/Context";
 
 function Student() {
     const [students, setStudents] = useState([]);
     const [name, setName] = useState('');
     const [roll, setRoll] = useState('');
+    const [value, setValue] = useContext(MyContext)
     let [isUpdateQuery, setisUpdateQuery] = useState(false);
     let [updateIndex, setupdateIndex] = useState(0);
 
@@ -18,6 +20,7 @@ function Student() {
                 data: { name, roll }
             }).then(res => {
                 setStudents(res.data);
+                setValue(name);
                 setName('');
                 setRoll('')
             }).catch(err => {
@@ -103,6 +106,7 @@ function Student() {
                 <li> {student.roll} : {student.name} <button onClick={(e) => deleteHandler(e, index)}>Delete</button>
                     <button onClick={(e) => updateHandler(e, index)}>Update</button></li>
             </ul>)}
+            <h1>{value}</h1>
         </div>
     )
 }

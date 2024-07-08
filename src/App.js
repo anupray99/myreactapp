@@ -1,9 +1,16 @@
+// import Student from './Student';
+import ContextDemo from './ContextDemo';
+import MyProvider from './Context/MyProvider';
 import Student from './Student';
 function App() {
   return (
-    <div>
-      <Student />
-    </div>
+    <MyProvider>
+      <div>
+        <Student />
+        <ContextDemo />
+      </div>
+    </MyProvider>
+
   );
 }
 
